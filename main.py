@@ -190,28 +190,25 @@ def main(args):
 
 		while True:
 			for button in buttons:
+				events = []
+
 				if GPIO.input(button["bcm"]) == GPIO.HIGH:
-					button['pressed'] += 1
-					events = []
+					button['pressed'] = True
 
 					if button["target_ev"] in ALL_KEYS:
 						events.append(InputEvent(libevdev.EV_KEY.__getattribute__(button["target_ev"]), 1))
 					elif button["target_ev"] in ALL_RELS:
 						events.append(InputEvent(libevdev.EV_REL.__getattribute__(button["target_ev"]), button["mouse_move"]))
-
-					events.append(InputEvent(libevdev.EV_SYN.SYN_REPORT, 0))
-					uinput.send_events(events)
-			time.sleep(1 / 100)
-			for button in buttons:
-				if button['pressed'] > 0 and GPIO.input(button["bcm"]) == GPIO.LOW:
-					button['pressed'] = 0
-					events = []
+					
+				elif button['pressed'] == True and GPIO.input(button["bcm"]) == GPIO.LOW:
+					button['pressed'] = False
 
 					if button["target_ev"] in ALL_KEYS:
 						events.append(InputEvent(libevdev.EV_KEY.__getattribute__(button["target_ev"]), 0))
 					elif button["target_ev"] in ALL_RELS:
 						events.append(InputEvent(libevdev.EV_REL.__getattribute__(button["target_ev"]), 0))
 
+				if len(events) > 0:
 					events.append(InputEvent(libevdev.EV_SYN.SYN_REPORT, 0))
 					uinput.send_events(events)
 			time.sleep(1 / 100)
