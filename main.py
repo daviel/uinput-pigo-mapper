@@ -95,14 +95,14 @@ buttons = [
 	'pressed': 0,
 	'mouse_move': 0
   },
-  {
+  #{
 	 # special BCM: 7
-	'bcm': 7,
-	'name': 'SPECIAL',
-	'target_ev': 'KEY_W',
-	'pressed': 0,
-	'mouse_move': 0
-  },
+	#'bcm': 7,
+	#'name': 'SPECIAL',
+	#'target_ev': 'KEY_W',
+	#'pressed': 0,
+	#'mouse_move': 0
+  #},
   {
 	 # SL1 BCM: 15
 	'bcm': 15,
