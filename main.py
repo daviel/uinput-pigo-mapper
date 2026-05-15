@@ -144,7 +144,7 @@ def main(args):
 	for arg in args:
 		arrArg = arg.split("=")
 		if len(arrArg) == 2:
-			print(arrArg)
+			#print(arrArg)
 			left = arrArg[0].upper()
 			right = arrArg[1]
 
@@ -153,7 +153,7 @@ def main(args):
 					button["target_ev"] = right
 					print(button)
 		elif len(arrArg) == 3:
-			print(arrArg)
+			#print(arrArg)
 			left = arrArg[0].upper()
 			middle = arrArg[1]
 			right = arrArg[2]
@@ -164,7 +164,7 @@ def main(args):
 
 	GPIO.setmode(GPIO.BCM)
 	for button in buttons:
-		#print(button, button["bcm"])
+		print(button, button["bcm"])
 		GPIO.setup(button["bcm"], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 	dev = libevdev.Device()
 	dev.name = "PiGo device"
