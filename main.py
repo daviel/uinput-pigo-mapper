@@ -214,6 +214,8 @@ def main(args):
 			time.sleep(1 / 100)
 	except OSError as e:
 		print(e)
+	finally:
+    	GPIO.cleanup()
 
 
 if __name__ == "__main__":
